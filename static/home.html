@@ -4,88 +4,242 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Shubham Jha | DevOps From Scratch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0D1117;
+            --panel: #161B22;
+            --panel-border: #30363D;
+            --text: #E6EDF3;
+            --text-dim: #8B949E;
+            --accent: #39D2C0;
+            --accent-dim: #1F3D3A;
+            --amber: #F2B94B;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             margin: 0;
             padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
         }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
+            background: rgba(13, 17, 23, 0.9);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--panel-border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
+
+        .nav-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+        .brand span { color: var(--accent); }
 
         nav ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 10px;
+            margin: 0;
+            display: flex;
+            gap: 24px;
         }
 
         nav ul li a {
-            color: #fff;
-            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.95rem;
         }
+        nav ul li a:hover { color: var(--text); text-decoration: none; }
 
         main {
-            padding: 20px;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 64px 24px 100px;
         }
 
-        section {
-            margin-bottom: 20px;
+        .terminal {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 48px;
+        }
+
+        .terminal-bar {
+            display: flex;
+            gap: 6px;
+            padding: 10px 14px;
+            background: #10151C;
+            border-bottom: 1px solid var(--panel-border);
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.red { background: #FF5F56; }
+        .dot.yellow { background: #FFBD2E; }
+        .dot.green { background: #27C93F; }
+
+        .terminal-body {
+            padding: 28px 24px 32px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .prompt {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .prompt .user { color: var(--accent); }
+        .prompt .path { color: var(--amber); }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin: 14px 0 16px;
+            color: var(--text);
+        }
+
+        .terminal-body p {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dim);
+            max-width: 60ch;
+            margin: 0;
+        }
+
+        section.card {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 28px 28px 30px;
+            margin-bottom: 24px;
+        }
+
+        section.card h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            margin: 0 0 10px;
+            color: var(--accent);
+        }
+
+        section.card p {
+            margin: 0;
+            color: var(--text-dim);
+            max-width: 62ch;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border: 1px solid var(--panel-border);
         }
 
         footer {
-            background-color: #333;
-            color: #fff;
+            border-top: 1px solid var(--panel-border);
             text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            padding: 20px 0;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
         }
-    </style>    
+
+        @media (max-width: 600px) {
+            nav ul { gap: 14px; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="home">Home</a></li>
-                <li><a href="about">About</a></li>
-                <li><a href="contact">Contact</a></li>
-                <li><a href="courses">Courses</a></li>
-            </ul>
-        </nav>
+        <div class="nav-wrap">
+            <div class="brand">shubham<span>@</span>devops</div>
+            <nav>
+                <ul>
+                    <li><a href="home">Home</a></li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="contact">Contact</a></li>
+                    <li><a href="courses">Courses</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section>
-            <h1>hi shubham here #################</h1>
-            <p>The main purpose of this website is to guide people on how to learn DevOps 
-                from basics for Free. We will provide you with the best resources to learn.
+        <div class="terminal">
+            <div class="terminal-bar">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="terminal-body">
+                <div class="prompt"><span class="user">shubham</span>@laptop:<span class="path">~</span>$ whoami</div>
+                <h1>Hi, I'm Shubham Jha</h1>
+                <p>
+                    This site guides you through DevOps, from the very basics, completely free.
+                    Real hands-on resources, no fluff, no paywalls.
+                </p>
+            </div>
+        </div>
+
+        <section class="card">
+            <h2>What you'll learn</h2>
+            <p>
+                Zero to hero on every major DevOps tool, plus the two cloud platforms that
+                matter most in the job market today: AWS and Azure.
             </p>
+            <div class="tag-row">
+                <span class="tag">Docker</span>
+                <span class="tag">Kubernetes</span>
+                <span class="tag">Terraform</span>
+                <span class="tag">CI/CD</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Azure</span>
+            </div>
         </section>
 
-        <section>
-            <h2>shubham hiii</h2>
-            <p> Zero to Hero courses on all DevOps tools and popular Cloud(AWS and Azure) platform</p>
-        </section>
-
-        <section>
-            <h2>Courses Offered</h2>
-            <p>Please look at the <a href="courses">courses</a> section.</p>  
+        <section class="card">
+            <h2>Courses offered</h2>
+            <p>
+                Structured, practical courses built around real projects — check the
+                <a href="courses">courses</a> section to see what's live right now.
+            </p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; Abhishek.Veeramalla</p>
+        &copy; Shubham Jha
     </footer>
 </body>
 </html>
